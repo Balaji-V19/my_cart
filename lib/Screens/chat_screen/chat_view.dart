@@ -129,11 +129,6 @@ class _ChatViewState extends State<ChatView> {
           borderRadius: BorderRadius.circular(8.0),
           child: InkWell(
             onTap: () async{
-              compute(sleep, Duration(microseconds: 0)).then((_) {
-                setState(() {
-                  selected=true;
-                });
-              });
               setState(() {
                 selected=true;
               });
@@ -196,6 +191,21 @@ class _ChatViewState extends State<ChatView> {
                 selected=false;
               });
             });
+            Alert(
+                context: context,
+                title: 'Translation',
+                desc: '$messageText',
+                type: AlertType.warning,
+                buttons: [
+                  DialogButton(
+                    child: Text('Okay'),
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    width: 50.0,
+                  )
+                ]
+            ).show();
             print("$messageText and $selected");
           },
           child: Text( selected?"$messageText":"See Translation",
@@ -271,6 +281,7 @@ class _ChatViewState extends State<ChatView> {
               Center(
                 child: Container(
                   width: width,
+                  color: AppColors.primaryDarkColor,
                   child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -279,17 +290,21 @@ class _ChatViewState extends State<ChatView> {
                         Expanded(
                           child: TextField(
                             controller: msg,
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                color: AppColors.primaryWhite
+                            ),
                             decoration: InputDecoration(
                                 hintText: 'Type your message',
                                 hintStyle: TextStyle(
-                                    fontSize: 20.0
+                                    fontSize: 20.0,
+                                  color: AppColors.primaryWhite
                                 ),
-                                suffixIcon: Icon(Icons.camera_alt,size: 20.0,)
                             ),
                           ),
                         ),
                         IconButton(
-                            icon: Icon(Icons.send, size: 20.0,),
+                            icon: Icon(Icons.send, size: 20.0,color: AppColors.primaryWhite),
                             onPressed: callback
                         ),
                       ]
@@ -297,7 +312,7 @@ class _ChatViewState extends State<ChatView> {
 
                 ),
               ),
-              SizedBox(height: 20.0,),
+              // SizedBox(height: 30.0,),
             ],
           ),
         ),

@@ -47,6 +47,7 @@ class _homeScreenState extends State<homeScreen> {
           box.put("UserName", allData[i]['UserName']);
           box.put("Email", allData[i]['Email']);
           box.put("Phone", allData[i]['Phone']);
+          print('here is the stuff ${allData[i]}');
         }
       }
       isLoading=false;
